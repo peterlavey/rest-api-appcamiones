@@ -14,11 +14,11 @@ mongoose.connect('mongodb://192.168.1.39/despacho', function (err, res) {
         nombre: "Mi despacho",
         descripcion: "Un despacho amplio y lindo",
         estado: 1,
-        fechas:{
+        fechas: {
             entrega: "2015-10-04",
             real: ""
         },
-        direccion:{
+        direccion: {
             descripcion: "Cajas con pescado",
             lat: -33.479868,
             lon: -70.599252

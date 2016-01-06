@@ -1,15 +1,20 @@
-var express  = require("express"),
-    app      = express(),
-    bodyParser  = require("body-parser"),
+/*jslint node:true, es5:true */
+'use strict';
+
+var express = require("express"),
+    app = express(),
+    bodyParser = require("body-parser"),
     methodOverride = require("method-override"),
-    http     = require("http"),
-    server   = http.createServer(app),
+    http = require("http"),
+    server = http.createServer(app),
     mongoose = require('mongoose');
 
 //Models
-var DespachoCtrl = require('./controllers/despacho'); 
+var DespachoCtrl = require('./controllers/despacho');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
@@ -36,26 +41,26 @@ app.use(function (req, res, next) {
 });
 
 despacho.route('/despacho')
-  .get(DespachoCtrl.findAllDespachos)
-  .post(DespachoCtrl.addDespacho);
+    .get(DespachoCtrl.findAllDespachos)
+    .post(DespachoCtrl.addDespacho);
 
 despacho.route('/despacho/:id')
-  .get(DespachoCtrl.findById)
-  .put(DespachoCtrl.updateDespacho)
-  .delete(DespachoCtrl.deleteDespacho);
+    .get(DespachoCtrl.findById)
+    .put(DespachoCtrl.updateDespacho)
+    .delete(DespachoCtrl.deleteDespacho);
 
-router.get('/', function(req, res) {
-   res.send("MEAN!");
+router.get('/', function (req, res) {
+    res.send("MEAN!");
 });
 
 app.use('/api', despacho);
 app.use(router);
 
-mongoose.connect('mongodb://192.168.1.39/despacho', function(err, res) {  
-  if(err) {
-    console.log('ERROR: connecting to Database. ' + err);
-  }
-  app.listen(3000, function() {
-    console.log("Node server running on http://localhost:3000");
-  });
-})
+mongoose.connect('mongodb://192.168.1.39/despacho', function (err, res) {
+    if (err) {
+        console.log('ERROR: connecting to Database. ' + err);
+    }
+    app.listen(3000, function () {
+        console.log("Node server running on http://localhost:3000");
+    });
+});
