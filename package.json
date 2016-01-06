@@ -1,7 +1,8 @@
 {
-  "name": "restapi",
+  "name": "rest-api-caminones",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend de la aplicación de gestión de entregas de camiones",
+  "repository": "https://bitbucket.org/PedroCisternas/rest-api-appcamiones.git",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
