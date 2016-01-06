@@ -18,13 +18,15 @@ exports.findAllDespachos = function (req, res) {
 };
 
 //GET - Return a despacho with specified ID
-exports.findById = function (req, res) {
-    Despacho.findById(req.params.id, function (err, despacho) {
+exports.findByRuta = function (req, res) {
+    var query = Despacho.find({});
+    query.where('ruta', req.params.ruta);
+    query.exec(function (err, despacho) {
         if (err) {
             return res.send(500, err.message);
         }
 
-        console.log('GET /despacho/' + req.params.id);
+        console.log('GET /despacho/' + req.params.ruta);
         res.status(200).jsonp(despacho);
     });
 };

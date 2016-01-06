@@ -56,7 +56,7 @@ despacho.route('/despacho')
     .post(DespachoCtrl.addDespacho);
 
 despacho.route('/despacho/:id')
-    .get(DespachoCtrl.findById)
+    .get(DespachoCtrl.findByRuta)
     .put(DespachoCtrl.updateDespacho)
     .delete(DespachoCtrl.deleteDespacho);
 

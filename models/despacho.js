@@ -15,7 +15,8 @@ var despachoSchema = new Schema({
             descripcion: {type: String},
             lat: {type: Number},
             lon: {type: Number}
-        }
+        },
+        ruta:{type:Number}
     });
 
 module.exports = mongoose.model('Despacho', despachoSchema);
