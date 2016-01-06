@@ -1,6 +1,17 @@
 /*jslint node:true, es5:true */
 'use strict';
 
+var minimist = require('minimist');
+
+var knownOptions = {
+    string: 'env',
+    default: {
+        dest: process.env.NODE_ENV || 'peter'
+    }
+};
+var options = minimist(process.argv.slice(2), knownOptions);
+var config = require("./config")(options);
+
 var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
@@ -24,7 +35,7 @@ var despacho = express.Router();
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8100');
+    res.setHeader('Access-Control-Allow-Origin', config.url.app);
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -56,11 +67,11 @@ router.get('/', function (req, res) {
 app.use('/api', despacho);
 app.use(router);
 
-mongoose.connect('mongodb://192.168.1.39/despacho', function (err, res) {
+mongoose.connect(config.url.mongo, function (err, res) {
     if (err) {
         console.log('ERROR: connecting to Database. ' + err);
     }
-    app.listen(3000, function () {
-        console.log("Node server running on http://localhost:3000");
+    app.listen(config.port, function () {
+        console.log("Node server running on http://localhost:" + config.port);
     });
 });
