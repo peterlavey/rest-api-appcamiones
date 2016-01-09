@@ -22,6 +22,7 @@ var express = require("express"),
 
 //Models
 var DespachoCtrl = require('./controllers/despacho');
+var RutaCtrl = require('./controllers/ruta');
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -31,6 +32,7 @@ app.use(methodOverride());
 
 var router = express.Router();
 var despacho = express.Router();
+var ruta = express.Router();
 
 app.use(function (req, res, next) {
 
@@ -60,11 +62,20 @@ despacho.route('/despacho/:id')
     .put(DespachoCtrl.updateDespacho)
     .delete(DespachoCtrl.deleteDespacho);
 
+ruta.route('/ruta')
+    .get(RutaCtrl.findAllRutas)
+    .post(RutaCtrl.addRuta);
+
+ruta.route('/ruta/:id')
+    .put(RutaCtrl.updateRuta)
+    .delete(RutaCtrl.deleteRuta);    
+
 router.get('/', function (req, res) {
     res.send("MEAN!");
 });
 
 app.use('/api', despacho);
+app.use('/api', ruta);
 app.use(router);
 
 mongoose.connect(config.url.mongo, function (err, res) {

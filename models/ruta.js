@@ -12,7 +12,9 @@ var rutaSchema = new Schema({
             termino: {type: String}
         },
         direccion: {
-            ciudad: {type: String}
+            ciudad: {type: String},
+            region: {type: String},
+            detalle: {type:String}
         },
         carga:{
         	tipo: {type: String},
