@@ -4,7 +4,7 @@ var config = {
     "peter": {
         "url": {
             "app": 'http://localhost:8100',
-            "mongo": 'mongodb://192.168.1.39/despacho'
+            "mongo": 'mongodb://192.168.1.40/despacho'
         },
         "port": 3000
     },
