@@ -58,7 +58,6 @@ despacho.route('/despacho')
     .post(DespachoCtrl.addDespacho);
 
 despacho.route('/despacho/:id')
-    .get(DespachoCtrl.findByRuta)
     .put(DespachoCtrl.updateDespacho)
     .delete(DespachoCtrl.deleteDespacho);
 
@@ -67,6 +66,7 @@ ruta.route('/ruta')
     .post(RutaCtrl.addRuta);
 
 ruta.route('/ruta/:id')
+    .get(RutaCtrl.findDespachos)
     .put(RutaCtrl.updateRuta)
     .delete(RutaCtrl.deleteRuta);    
 

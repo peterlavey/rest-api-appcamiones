@@ -1,8 +1,7 @@
 /*jslint node:true, es5:true */
 'use strict';
 var mongoose = require('mongoose'),
-    Schema   = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+    Schema   = mongoose.Schema;
 
 var despachoSchema = new Schema({
         nombre:    { type: String },
@@ -16,8 +15,7 @@ var despachoSchema = new Schema({
             descripcion: {type: String},
             lat: {type: Number},
             lon: {type: Number}
-        },
-        ruta:{type:ObjectId, ref:'Ruta'}
+        }
     });
 
 module.exports = mongoose.model('Despacho', despachoSchema);

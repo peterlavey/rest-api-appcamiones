@@ -17,6 +17,36 @@ exports.findAllRutas = function (req, res) {
     });
 };
 
+//GET - Return a ruta with specified ID
+exports.findDespachos = function (req, res) {
+    console.log(req.params);
+    Ruta.find({'_id':req.params.id}).populate('despachos').exec(function(err, despachos){
+        if (err) {
+            return res.send(500, err.message);
+        }
+        console.log('GET /despacho/' + despachos);
+        res.status(200).jsonp(despachos);
+    });
+   /*var query = Ruta.find({});
+    query.where('ruta', req.params.ruta);
+    query.exec(function (err, despacho) {
+        if (err) {
+            return res.send(500, err.message);
+        }
+
+        console.log('GET /despacho/' + req.params.ruta);
+        res.status(200).jsonp(despacho);
+    });
+     Despacho.find({'ruta':req.params.ruta}, function(err, despacho){
+         if (err) {
+            return res.send(500, err.message);
+        }
+        
+        console.log('GET /despacho/' + req.params.ruta);
+        res.status(200).jsonp(despacho);
+    });*/
+};
+
 //POST - Insert a new ruta in the DB
 exports.addRuta = function (req, res) {
     console.log('POST');
@@ -30,7 +60,8 @@ exports.addRuta = function (req, res) {
         direccion: req.body.direccion,
         carga: req.body.carga,
         oferta: req.body.oferta,
-        empresa: req.body.empresa
+        empresa: req.body.empresa,
+        despachos:req.body.despachos
     });
 
     ruta.save(function (err, ruta) {
@@ -52,7 +83,8 @@ exports.updateRuta = function (req, res) {
         ruta.direccion = req.body.direccion;
         ruta.carga = req.body.carga;
         ruta.oferta = req.body.oferta;
-        ruta.empresa = req.body.empres;
+        ruta.empresa = req.body.empresa;
+        ruta.despachos = req.body.despachos;
 
         ruta.save(function (err) {
             if (err) {

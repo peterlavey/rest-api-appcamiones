@@ -1,7 +1,6 @@
 /*jslint node:true, es5:true */
 'use strict';
 
-//File: controllers/tvshows.js
 var mongoose = require('mongoose');
 var Despacho = require('../models/despacho');
 
@@ -19,7 +18,7 @@ exports.findAllDespachos = function (req, res) {
 
 //GET - Return a despacho with specified ID
 exports.findByRuta = function (req, res) {
-    /*var query = Despacho.find({});
+   var query = Despacho.find({});
     query.where('ruta', req.params.ruta);
     query.exec(function (err, despacho) {
         if (err) {
@@ -28,15 +27,15 @@ exports.findByRuta = function (req, res) {
 
         console.log('GET /despacho/' + req.params.ruta);
         res.status(200).jsonp(despacho);
-    });*/
-    Despacho.find({'ruta':req.params.ruta}, function(err, despacho){
+    });
+     /*Despacho.find({'ruta':req.params.ruta}, function(err, despacho){
          if (err) {
             return res.send(500, err.message);
         }
         
         console.log('GET /despacho/' + req.params.ruta);
         res.status(200).jsonp(despacho);
-    });
+    });*/
 };
 
 //POST - Insert a new despacho in the DB
