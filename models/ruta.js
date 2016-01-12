@@ -1,4 +1,4 @@
-/*jslint node:true, es5:true */
+    /*jslint node:true, es5:true */
 'use strict';
 var mongoose = require('mongoose'),
     Schema   = mongoose.Schema;

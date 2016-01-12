@@ -12,26 +12,26 @@ mongoose.connect('mongodb://192.168.1.40/despacho', function (err, res) {
     }
 
     var ruta = new Ruta({
-        nombre: "ruta2",
-        descripcion: "descripcion de la ruta",
+        nombre: "Cementos",
+        descripcion: "carga de cementos",
         estado: 1,
         fechas: {
-            creacion: "2015-10-04",
+            creacion: "2015-10-05",
             termino: ""
         },
         direccion: {
-            ciudad: "Valparaiso",
-            region: "Playa ancha",
-            detalle: "Av.Libertador babasdas"
+            ciudad: "Santiago",
+            region: "Quinta normal",
+            detalle: "Las lilas"
         },
         carga: {
-            tipo: "Pescado",
-            peso: 700
+            tipo: "Cemento",
+            peso: 800
         },
-        oferta: 2000000,
+        oferta: 1700000,
         empresa: {
-            nombre: "Don Lucho",
-            logo: "donlucho"
+            nombre: "Polpaico",
+            logo: "polpaico"
         }
     });
 

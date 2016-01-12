@@ -19,13 +19,21 @@ exports.findAllDespachos = function (req, res) {
 
 //GET - Return a despacho with specified ID
 exports.findByRuta = function (req, res) {
-    var query = Despacho.find({});
+    /*var query = Despacho.find({});
     query.where('ruta', req.params.ruta);
     query.exec(function (err, despacho) {
         if (err) {
             return res.send(500, err.message);
         }
 
+        console.log('GET /despacho/' + req.params.ruta);
+        res.status(200).jsonp(despacho);
+    });*/
+    Despacho.find({'ruta':req.params.ruta}, function(err, despacho){
+         if (err) {
+            return res.send(500, err.message);
+        }
+        
         console.log('GET /despacho/' + req.params.ruta);
         res.status(200).jsonp(despacho);
     });
@@ -41,7 +49,8 @@ exports.addDespacho = function (req, res) {
         descripcion: req.body.descripcion,
         estado: req.body.estado,
         fechas: req.body.fechas,
-        direccion: req.body.direccion
+        direccion: req.body.direccion,
+        ruta:req.body.ruta
     });
 
     despacho.save(function (err, despacho) {
@@ -61,6 +70,7 @@ exports.updateDespacho = function (req, res) {
         despacho.estado = req.body.estado;
         despacho.fechas = req.body.fechas;
         despacho.direccion = req.body.direccion;
+        despacho.ruta = req.body.ruta;
 
         despacho.save(function (err) {
             if (err) {
