@@ -14,6 +14,13 @@ var config = {
             "mongo": 'mongodb://localhost/'
         },
         "port": 8080
+    },
+    "server": {
+        "url": {
+            "app": 'http://localhost:8100',
+            "mongo": 'mongodb://localhost/app_camiones'
+        },
+        "port": 3001
     }
 };
 module.exports = function (options) {

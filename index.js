@@ -99,7 +99,7 @@ usuario.route('/usuario/:username/:password')
     .post(UsuarioCtrl.authenticate);  
 
 router.get('/', function (req, res) {
-    res.send("MEAN!");
+    res.send("App Camiones Index");
 });
 
 app.use('/api', despacho);
