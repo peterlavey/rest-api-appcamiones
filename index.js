@@ -68,10 +68,10 @@ ruta.route('/ruta')
 ruta.route('/ruta/:id')
     .get(RutaCtrl.findDespachos)
     .put(RutaCtrl.updateRuta)
-    .delete(RutaCtrl.deleteRuta);    
+    .delete(RutaCtrl.deleteRuta);
 
 router.get('/', function (req, res) {
-    res.send("MEAN!");
+    res.send("App Camiones Index");
 });
 
 app.use('/api', despacho);
