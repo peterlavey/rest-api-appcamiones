@@ -2,6 +2,9 @@
 'use strict';
 
 var minimist = require('minimist');
+var expressJwt = require('express-jwt');
+var jwt = require('jsonwebtoken');
+var secret = 'secret123456';
 
 var knownOptions = {
     string: 'env',
@@ -23,7 +26,10 @@ var express = require("express"),
 //Models
 var DespachoCtrl = require('./controllers/despacho');
 var RutaCtrl = require('./controllers/ruta');
+var UsuarioCtrl = require('./controllers/usuario');
 
+//Esto esta protegiendo todo el dominio
+//app.use('/api', expressJwt({secret: secret}));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
@@ -33,9 +39,15 @@ app.use(methodOverride());
 var router = express.Router();
 var despacho = express.Router();
 var ruta = express.Router();
+var usuario = express.Router();
+
+/*app.use(function(err, req, res, next){
+  if (err.constructor.name === 'UnauthorizedError') {
+    res.status(401).send('Unauthorized');
+  }
+});*/
 
 app.use(function (req, res, next) {
-
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', config.url.app);
 
@@ -43,14 +55,21 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Authorization');
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    //res.setHeader('Access-Control-Allow-Credentials', true);
 
     // Pass to next layer of middleware
     next();
+});
+
+app.get('/api/restricted', function (req, res) {
+  console.log('user ' + req.user.email + ' is calling /api/restricted');
+  res.json({
+    name: 'foo'
+  });
 });
 
 despacho.route('/despacho')
@@ -68,7 +87,16 @@ ruta.route('/ruta')
 ruta.route('/ruta/:id')
     .get(RutaCtrl.findDespachos)
     .put(RutaCtrl.updateRuta)
-    .delete(RutaCtrl.deleteRuta);    
+    .delete(RutaCtrl.deleteRuta);   
+    
+usuario.route('/usuario')
+    .get(UsuarioCtrl.findAllUsuarios)
+    .post(UsuarioCtrl.addUsuario);
+
+usuario.route('/usuario/:username/:password')
+    .put(UsuarioCtrl.updateUsuario)
+    .delete(UsuarioCtrl.deleteUsuario)
+    .post(UsuarioCtrl.authenticate);  
 
 router.get('/', function (req, res) {
     res.send("MEAN!");
@@ -76,6 +104,7 @@ router.get('/', function (req, res) {
 
 app.use('/api', despacho);
 app.use('/api', ruta);
+app.use('/api', usuario);
 app.use(router);
 
 mongoose.connect(config.url.mongo, function (err, res) {
