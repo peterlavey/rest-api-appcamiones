@@ -38,23 +38,25 @@ var jwt = require('jsonwebtoken');
 exports.authenticate = function(req, res){
     console.log('authenticate');
     Usuario.findOne({'username':req.params.username}).exec(function(err, usuario){
-        console.log('username request: '+req.params.username);
         if (err) {
             console.log('Error 500');
             res.status(500).send(err.message);
             return;
-        }else{
-            if (!(req.params.username === usuario.username && req.params.password === usuario.password)) {
+        } 
+        
+        if(usuario){
+           if (!(req.params.username === usuario.username && req.params.password === usuario.password)) {
                 res.status(401).send('Wrong user or password');
                 return;
             }else{
+                console.info('Success!');
                 var token = jwt.sign(usuario, 'jwtoken', { expiresIn: 60*5 });//5 minutos
                 res.json({ token: token });
-                console.log('Usuario inexistente');
-                res.status(401).send('Wrong user or password');
-                return; 
-            }   
-        }  
+            } 
+        }else{
+            res.status(401).send('Wrong user or password');
+            return;
+        }
     });       
 };
 

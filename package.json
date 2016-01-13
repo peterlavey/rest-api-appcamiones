@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "peter": "node index.js --env peter",
-    "sex_bomb": "node index.js --env sex_bomb"
+    "sex_bomb": "node index.js --env sex_bomb",
+    "work": "node index.js --env work"
   },
   "author": "Pedro Cisternas",
   "license": "ISC",
