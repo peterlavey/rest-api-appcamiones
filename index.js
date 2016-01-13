@@ -93,6 +93,9 @@ usuario.route('/usuario')
     .get(UsuarioCtrl.findAllUsuarios)
     .post(UsuarioCtrl.addUsuario);
 
+usuario.route('/usuario/:id')
+    .get(UsuarioCtrl.findRutas);
+    
 usuario.route('/usuario/:username/:password')
     .put(UsuarioCtrl.updateUsuario)
     .delete(UsuarioCtrl.deleteUsuario)

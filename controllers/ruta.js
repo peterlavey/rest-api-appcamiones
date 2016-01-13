@@ -27,24 +27,6 @@ exports.findDespachos = function (req, res) {
         console.log('GET /despacho/' + despachos);
         res.status(200).jsonp(despachos);
     });
-   /*var query = Ruta.find({});
-    query.where('ruta', req.params.ruta);
-    query.exec(function (err, despacho) {
-        if (err) {
-            return res.send(500, err.message);
-        }
-
-        console.log('GET /despacho/' + req.params.ruta);
-        res.status(200).jsonp(despacho);
-    });
-     Despacho.find({'ruta':req.params.ruta}, function(err, despacho){
-         if (err) {
-            return res.send(500, err.message);
-        }
-        
-        console.log('GET /despacho/' + req.params.ruta);
-        res.status(200).jsonp(despacho);
-    });*/
 };
 
 //POST - Insert a new ruta in the DB

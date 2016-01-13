@@ -1,7 +1,8 @@
 /*jslint node:true, es5:true */
 'use strict';
 var mongoose = require('mongoose'),
-    Schema   = mongoose.Schema;
+    Schema   = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 
 var usuarioSchema = new Schema({
     username: { type: String, required: true, index: { unique: true } },
@@ -18,7 +19,8 @@ var usuarioSchema = new Schema({
         descripcion: {type: String},
         lat: {type: Number},
         lon: {type: Number}
-    }
+    },
+    rutas: [{type:ObjectId, ref:'Ruta'}]
 });
 
 module.exports = mongoose.model('Usuario', usuarioSchema);
