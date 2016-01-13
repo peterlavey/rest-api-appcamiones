@@ -5,7 +5,8 @@ var minimist = require('minimist');
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var secret = 'secret123456';
-
+//test GIT
+var test={};
 var knownOptions = {
     string: 'env',
     default: {
