@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
     Despacho = require('../models/despacho');
 
 
-mongoose.connect('mongodb://192.168.1.39/despacho', function (err, res) {
+mongoose.connect('mongodb://peter:peter2712@ds058048.mongolab.com:58048/despacho', function (err, res) {
     if (err) {
         console.log('ERROR: connecting to Database. ' + err);
     }

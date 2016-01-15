@@ -18,7 +18,7 @@ var config = {
     "server": {
         "url": {
             "app": 'http://localhost:8100',
-            "mongo": 'mongodb://localhost/app_camiones'
+            "mongo": 'mongodb://peter:peter2712@ds058048.mongolab.com:58048/despacho'
         },
         "port": 3001
     },
