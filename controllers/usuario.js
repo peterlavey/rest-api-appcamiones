@@ -7,7 +7,7 @@ var Ruta = require('../models/ruta');
 var jwt = require('jsonwebtoken');
 
 exports.authenticate = function(req, res){
-    console.log('authenticate');
+    console.log("authenticate...");
     Usuario.findOne({'username':req.params.username}).exec(function(err, usuario){
         if (err) {
             console.log('Error 500');
@@ -20,7 +20,7 @@ exports.authenticate = function(req, res){
                 res.status(401).send('Wrong user or password');
                 return;
             }else{
-                console.info('Success!');
+                console.log("authenticate - success!");
                 var token = jwt.sign(usuario, 'jwtoken', { expiresIn: 60*5 });//5 minutos
                 res.json({ token: token, usuario: usuario });
             } 
@@ -33,17 +33,19 @@ exports.authenticate = function(req, res){
 
 exports.findAllUsuarios = function (req, res) {
     Usuario.find(function (err, usuarios) {
+        console.log("findAllUsuarios...");
         if (err) {
             res.send(500, err.message);
         }
 
-        console.log('GET /findAllUsuarios');
+        console.log("findAllUsuarios - success!");
         res.status(200).jsonp(usuarios);
     });
 };
 
 exports.findRutas = function (req, res) {
     Usuario.findById(req.params.id).populate('rutas').exec(function(err, usuario){
+        console.log("findRutas...");
         if (err) {
             return  res.status(500).send(err.usuario);
         }
@@ -61,15 +63,14 @@ exports.findRutas = function (req, res) {
             if (err) {
                 return res.status(500).send(err.ruta);
             }
-            console.log('GET /usuario/' + ruta);
+            console.log("findRutas - success!");
             res.status(200).jsonp(ruta.despachos);
         });      
     });
 };
 
 exports.addUsuario = function (req, res) {
-    console.log('POST');
-    console.log(req.body);
+    console.log("addUsuario...");
 
     var usuario = new Usuario({
         username: req.body.username,
@@ -87,13 +88,14 @@ exports.addUsuario = function (req, res) {
         if (err) {
             return res.status(500).send(err.message);
         }
+        console.log("addUsuario - success!");
         res.status(200).jsonp(usuario);
     });
 };
 
 exports.updateUsuario = function (req, res) {
     Usuario.findById(req.params.id, function (err, usuario) {
-        console.log(req.body);
+        console.log("updateUsuario...");
         usuario.username = req.body.username;
         usuario.password = req.body.password;
         usuario.token = req.body.token;
@@ -108,6 +110,7 @@ exports.updateUsuario = function (req, res) {
             if (err) {
                 return res.status(500).send(err.message);
             }
+            console.log("updateUsuario - success!");
             res.status(200).jsonp(usuario);
         });
     });
@@ -115,10 +118,12 @@ exports.updateUsuario = function (req, res) {
 
 exports.deleteUsuario = function (req, res) {
     Usuario.findById(req.params.id, function (err, usuario) {
+        console.log("deleteUsuario...");
         usuario.remove(function (err) {
             if (err) {
                 return res.status(500).send(err.message);
             }
+            console.log("deleteUsuario - success!");
             res.status(200).send();
         });
     });

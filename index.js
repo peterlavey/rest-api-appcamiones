@@ -79,6 +79,8 @@ despacho.route('/despacho')
 despacho.route('/despacho/:id')
     .put(DespachoCtrl.updateDespacho)
     .delete(DespachoCtrl.deleteDespacho);
+    
+despacho.route('/despacho/:despacho')    
 
 ruta.route('/ruta')
     .get(RutaCtrl.findAllRutas)

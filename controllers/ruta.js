@@ -7,32 +7,32 @@ var Ruta = require('../models/ruta');
 
 //GET - Return all despachos in the DB
 exports.findAllRutas = function (req, res) {
+    console.log("findAllRutas...");
     Ruta.find(function (err, ruta) {
         if (err) {
             res.send(500, err.message);
         }
 
-        console.log('GET /ruta');
+        console.log("findAllRutas - success!");
         res.status(200).jsonp(ruta);
     });
 };
 
 //GET - Return a ruta with specified ID
 exports.findDespachos = function (req, res) {
-    console.log(req.params);
+    console.log("findDespachos...");
     Ruta.find({'_id':req.params.id}).populate('despachos').exec(function(err, despachos){
         if (err) {
             return res.send(500, err.message);
         }
-        console.log('GET /despacho/' + despachos);
+        console.log("findDespachos - success!");
         res.status(200).jsonp(despachos);
     });
 };
 
 //POST - Insert a new ruta in the DB
 exports.addRuta = function (req, res) {
-    console.log('POST');
-    console.log(req.body);
+    console.log("addRuta...");
 
     var ruta = new Ruta({
         nombre: req.body.nombre,
@@ -50,6 +50,7 @@ exports.addRuta = function (req, res) {
         if (err) {
             return res.status(500).send(err.message);
         }
+        console.log("addRuta - success!");
         res.status(200).jsonp(ruta);
     });
 };
@@ -57,7 +58,7 @@ exports.addRuta = function (req, res) {
 //PUT - Update a register already exists
 exports.updateRuta = function (req, res) {
     Ruta.findById(req.params.id, function (err, ruta) {
-        console.log(req.body);
+        console.log("findById...");
         ruta.nombre = req.body.nombre;
         ruta.descripcion = req.body.descripcion;
         ruta.estado = req.body.estado;
@@ -72,6 +73,7 @@ exports.updateRuta = function (req, res) {
             if (err) {
                 return res.status(500).send(err.message);
             }
+            console.log("findById - success!");
             res.status(200).jsonp(ruta);
         });
     });
@@ -80,10 +82,12 @@ exports.updateRuta = function (req, res) {
 //DELETE - Delete a ruta with specified ID
 exports.deleteRuta = function (req, res) {
     Ruta.findById(req.params.id, function (err, ruta) {
+        console.log("deleteRuta...");
         ruta.remove(function (err) {
             if (err) {
                 return res.status(500).send(err.message);
             }
+            console.log("deleteRuta - success!");
             res.status(200).send();
         });
     });
