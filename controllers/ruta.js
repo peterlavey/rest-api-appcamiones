@@ -3,6 +3,7 @@
 
 //File: controllers/tvshows.js
 var mongoose = require('mongoose');
+var Usuario = require('../models/usuario');
 var Ruta = require('../models/ruta');
 
 //GET - Return all despachos in the DB
@@ -19,7 +20,7 @@ exports.findAllRutas = function (req, res) {
 };
 
 //GET - Return a ruta with specified ID
-exports.findDespachos = function (req, res) {
+/*exports.findDespachos = function (req, res) {
     console.log("findDespachos...");
     Ruta.find({'_id':req.params.id}).populate('despachos').exec(function(err, despachos){
         if (err) {
@@ -27,6 +28,16 @@ exports.findDespachos = function (req, res) {
         }
         console.log("findDespachos - success!");
         res.status(200).jsonp(despachos);
+    });
+};*/
+exports.findRutas = function (req, res) {
+    Usuario.findById(req.params.id).populate('rutas').exec(function(err, usuario){
+        console.log("findRutas...");
+        if (err) {
+            return  res.status(500).send(err.usuario);
+        }
+        console.log("findRutas - success!");
+        res.status(200).jsonp(usuario.rutas);           
     });
 };
 

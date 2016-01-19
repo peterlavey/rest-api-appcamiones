@@ -6,6 +6,8 @@ var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var secret = 'secret123456';
 
+var port=Number(process.env.PORT || 3001);
+/*
 var knownOptions = {
     string: 'env',
     default: {
@@ -14,7 +16,7 @@ var knownOptions = {
 };
 var options = minimist(process.argv.slice(2), knownOptions);
 var config = require("./config")(options);
-
+*/
 var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
@@ -49,7 +51,8 @@ var usuario = express.Router();
 
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', config.url.app);
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8100');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -87,7 +90,7 @@ ruta.route('/ruta')
     .post(RutaCtrl.addRuta);
 
 ruta.route('/ruta/:id')
-    .get(RutaCtrl.findDespachos)
+    .get(RutaCtrl.findRutas)
     .put(RutaCtrl.updateRuta)
     .delete(RutaCtrl.deleteRuta);   
     
@@ -112,11 +115,11 @@ app.use('/api', ruta);
 app.use('/api', usuario);
 app.use(router);
 
-mongoose.connect(config.url.mongo, function (err, res) {
+mongoose.connect('mongodb://peter:peter2712@ds058048.mongolab.com:58048/despacho', function (err, res) {
     if (err) {
         console.log('ERROR: connecting to Database. ' + err);
     }
-    app.listen(config.port, function () {
-        console.log("Node server running on http://localhost:" + config.port);
+    app.listen(port, function () {
+        console.log("Node server running on http://localhost:" + port);
     });
 });
