@@ -1,10 +1,10 @@
     /*jslint node:true, es5:true */
 'use strict';
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
     Schema   = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
-var rutaSchema = new Schema({
+const rutaSchema = new Schema({
         nombre:    { type: String },
         descripcion:  { type: String },
         estado:     { type: Number },

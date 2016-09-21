@@ -1,6 +1,6 @@
 /*jslint node:true*/
 'use strict';
-var config = {
+let config = {
     "peter": {
         "url": {
             "app": 'http://localhost:8100',
@@ -30,7 +30,4 @@ var config = {
         "port": 3000
     }
 };
-module.exports = function (options) {
-
-    return config[options.env];
-};
+module.exports = (options)=>config[options.env];

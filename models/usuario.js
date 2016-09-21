@@ -1,10 +1,10 @@
 /*jslint node:true, es5:true */
 'use strict';
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
     Schema   = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
-var usuarioSchema = new Schema({
+const usuarioSchema = new Schema({
     username: { type: String, required: true, index: { unique: true } },
     password: { type: String, required: true },
     token: {type: String},

@@ -1,25 +1,21 @@
 /*jslint node: true */
 /*jslint unparam: true*/
 'use strict';
-var mongoose = require('mongoose'),
+let mongoose = require('mongoose'),
     Usuario = require('../models/usuario'),
     Ruta = require('../models/ruta'),
     Despacho = require('../models/despacho');
 
 
-mongoose.connect('mongodb://peter:peter2712@ds058048.mongolab.com:58048/despacho', function (err, res) {
-    if (err) {
-        console.log('ERROR: connecting to Database. ' + err);
-    }
-    
-    Despacho.remove({}, function(err,removed) {
+mongoose.connect('mongodb://peter:peter2712@ds058048.mongolab.com:58048/despacho', (err, res)=> if (err) console.log('ERROR: connecting to Database. ' + err);
+    Despacho.remove({}, (err,removed) =>{
         if (!err) {
-            Ruta.remove({}, function(err,removed) {
+            Ruta.remove({}, (err,removed)=>{
                 if (!err) {
-                    Usuario.remove({}, function(err,removed) {
+                    Usuario.remove({}, (err,removed) =>{
                         if (!err) {
                             console.log("Remove all!");
-                             var despacho = new Despacho({
+                             let despacho = new Despacho({
                                 nombre: "adsad",
                                 descripcion: "una descarga",
                                 estado: 1,
@@ -34,7 +30,7 @@ mongoose.connect('mongodb://peter:peter2712@ds058048.mongolab.com:58048/despacho
                                 }
                             });
 
-                            var despacho2 = new Despacho({
+                            let despacho2 = new Despacho({
                                 nombre: "bbbbbb",
                                 descripcion: "una descarga",
                                 estado: 1,
@@ -48,8 +44,8 @@ mongoose.connect('mongodb://peter:peter2712@ds058048.mongolab.com:58048/despacho
                                     lon: -70.6830232
                                 }
                             });
-                            
-                            var despacho3 = new Despacho({
+
+                            let despacho3 = new Despacho({
                                 nombre: "despacho 3",
                                 descripcion: "una descarga",
                                 estado: 1,
@@ -67,8 +63,8 @@ mongoose.connect('mongodb://peter:peter2712@ds058048.mongolab.com:58048/despacho
                             despacho.save();
                             despacho2.save();
                             despacho3.save();
-                            
-                            var ruta= new Ruta({
+
+                            let ruta= new Ruta({
                                 nombre: "Rutita",
                                 descripcion: "descripcion de la ruta",
                                 estado: 1,
@@ -90,10 +86,10 @@ mongoose.connect('mongodb://peter:peter2712@ds058048.mongolab.com:58048/despacho
                                     nombre: "Don Lucho",
                                     logo: "donlucho"
                                 },
-                                despachos: [despacho._id, despacho2._id]    
+                                despachos: [despacho._id, despacho2._id]
                             });
-                            
-                            var ruta2= new Ruta({
+
+                            let ruta2= new Ruta({
                                 nombre: "Rutota",
                                 descripcion: "descripcion de la ruta",
                                 estado: 2,
@@ -115,27 +111,23 @@ mongoose.connect('mongodb://peter:peter2712@ds058048.mongolab.com:58048/despacho
                                     nombre: "Don Lucho",
                                     logo: "donlucho"
                                 },
-                                despachos: [despacho3._id]    
+                                despachos: [despacho3._id]
                             });
-                            
+
                             ruta.save();
                             ruta2.save();
-                            
-                            var usuario = new Usuario({
+
+                            let usuario = new Usuario({
                                 username: "admin",
                                 password: "123",
                                 rutas: [ruta._id, ruta2._id]
                             });
 
-                            usuario.save(function(error) {
-                                if (!error) {
-                                    console.log("Data created!");
-                                }
-                            });
+                            usuario.save((error)=> if (!error) console.log("Data created!"));
                         }
                     })
                 }
             })
         }
-    });     
+    });
 });

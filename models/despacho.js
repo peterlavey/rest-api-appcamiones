@@ -1,9 +1,9 @@
 /*jslint node:true, es5:true */
 'use strict';
-var mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
     Schema   = mongoose.Schema;
 
-var despachoSchema = new Schema({
+const despachoSchema = new Schema({
         nombre:    { type: String },
         descripcion:  { type: String },
         estado:     { type: Number },
